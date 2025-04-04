@@ -5,6 +5,7 @@ import tracking as tr
 import threading
 from pynput import keyboard
 import pdb
+import time
 
 # mode de controle
 keys = {'z': 0, 'q': 0, 's': 0, 'd': 0, 'c': 0, 'v': 0, 'Z': 0, 'S': 0}
@@ -13,8 +14,6 @@ def on_press(key):
     try:
         if key.char in keys:
             keys[key.char] = 1
-            print('press')
-            print(keys)
     except AttributeError:
         pass
 
@@ -41,14 +40,12 @@ model = YOLO("yolo11s.pt")
 # object classes
 classNames = model.names
 
-
 while True:
-    for value in keys.values():
-        if value==1:
+    if 1 in keys.values():
             tr.telecom(list(keys.values()))
-            print('dans if')
     
     else:
+        tr.telecom(list(keys.values()))
         success, img = cap.read()
         results = model(img, stream=True)
 
@@ -78,10 +75,10 @@ while True:
 
                     # confidence
                     confidence = math.ceil((box.conf[0] * 100)) / 100
-                    print("Confidence --->", confidence)
+                    #print("Confidence --->", confidence)
 
                     # class name
-                    print("Class name -->", classNames[cls])
+                    #print("Class name -->", classNames[cls])
 
                     # object details text
                     org = [x1, y1]

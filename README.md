@@ -1,2 +1,7 @@
 # Projet_ROVision
-Projet romarin nhbgfdvdsxq
+Projet romarin
+
+Procédure release GitHub
+git add . (ajouter tout)
+git commit -m 'version'
+git push
